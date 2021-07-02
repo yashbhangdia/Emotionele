@@ -125,6 +125,9 @@ function chatbox(e)
 	response.className = 'response';
 	activity.className = 'response';
 	activity.innerHTML = "";
+	response.innerHTML = "Ele is typing ... "
+
+	var options = [];
 
 	var message = document.createElement('p');
 	message.className = 'message';
@@ -150,9 +153,29 @@ function chatbox(e)
 				activity.innerHTML = res[1];
 			}
 			response.innerHTML = res[0];
+			
+			if(string[1]!="")
+			{
+				var option = string[1].split("-");
+				for(x of option)
+				{
+					options.push(x);
+				}
+
+				var chipList = document.getElementById("chipList");
+				for(x of options)
+				{
+					console.log(x);
+					var li = document.createElement('li');
+					li.className = "chip"
+					var sp = document.createElement('span');
+					sp.innerHTML = x;
+					li.appendChild(sp);
+					li.addEventListener("click", chatbox);
+					chipList.append(li);
+				}
 			}
-
-
+		}
 	};
 	var fd=new FormData();
 	fd.append("answer", answer);
@@ -183,6 +206,9 @@ function createDownloadLink(blob) {
 	var link = document.createElement('a');
 	var response = document.createElement('p');
 	var activity = document.createElement('p');
+
+	activity.innerHTML = " ";
+	response.innerHTML = "Ele is typing ... "
 	
 	var options = [];
 
@@ -196,7 +222,6 @@ function createDownloadLink(blob) {
 
 	//Response
 	response.className = 'response';
-	activity.className = 'response';
 
 	//save to disk link
 	link.href = url;
@@ -207,56 +232,45 @@ function createDownloadLink(blob) {
 	li.appendChild(au);
 	
 	
-	//add the filename to the li
-	//li.appendChild(document.createTextNode(filename+".wav "))
 
-	//add the save to disk link to li
-	//li.appendChild(link);
-	
-	//upload link
-	//var upload = document.createElement('a');
-	// upload.href="#";
-	// upload.innerHTML = "Upload";
-	// upload.addEventListener("click", function(event){
 	var xhr=new XMLHttpRequest();
 	xhr.onload=function(e) {
 		if(this.readyState === 4 && this.status === 200) {
 			//console.log("Server returned: ",e.target.responseText);
 		var string = this.responseText.split("#");
 		var res = string[0].split("_");
-		var record = document.getElementById("recordingList");
-		li.appendChild(document.createTextNode(" "))
-
+		// var record = document.getElementById("recordingList");
+		
 		response.innerHTML = res[0];
-		li.appendChild(response);
-
 		if(res.length>1)
 		{
 			// console.log("Length > 1");
 			activity.innerHTML = res[1];
-			li.appendChild(document.createTextNode(" "))
-			li.appendChild(activity);
-		}
-		recordingsList.appendChild(li);
-
-		var option = string[1].split("-");
-		for(x of option)
-		{
-			options.push(x);
+			activity.className = 'response';
 		}
 
-		var chipList = document.getElementById("chipList");
-		for(x of options)
+		if(string[1]!="")
 		{
-			console.log(x);
-			var li = document.createElement('li');
-			li.className = "chip"
-			var sp = document.createElement('span');
-			sp.innerHTML = x;
-			li.appendChild(sp);
-			li.addEventListener("click", chatbox);
-			chipList.append(li);
+			var option = string[1].split("-");
+			for(x of option)
+			{
+				options.push(x);
+			}
+
+			var chipList = document.getElementById("chipList");
+			for(x of options)
+			{
+				console.log(x);
+				var li = document.createElement('li');
+				li.className = "chip"
+				var sp = document.createElement('span');
+				sp.innerHTML = x;
+				li.appendChild(sp);
+				li.addEventListener("click", chatbox);
+				chipList.append(li);
+			}
 		}
+		
 		}
 	};
 	var fd=new FormData();
@@ -266,6 +280,9 @@ function createDownloadLink(blob) {
 	//})
 	
 	//add the li element to the ol
+	li.appendChild(document.createTextNode(" "))
+	li.appendChild(response);
+	li.appendChild(activity);
 	recordingsList.appendChild(li);
 
 	console.log(activity.innerHTML);

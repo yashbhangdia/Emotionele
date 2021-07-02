@@ -18,8 +18,6 @@ from keras.preprocessing.sequence import pad_sequences
 from sklearn.metrics import classification_report
 from tensorflow import keras
 
-from flask_session import Session
-
 import speech_recognition as sr
 
 from Joy import joy
@@ -131,19 +129,27 @@ def index():
             if(emotion_state==0):
                 # Angry
                 responses, inpnum, options = angry(inpnum, op)
+                if(inpnum==-1):
+                    emotion_state = -1
             elif(emotion_state==1):
                 #Anxious
                 responses, inpnum, options = anxious(inpnum, op)
+                if(inpnum==-1):
+                    emotion_state = -1
             elif(emotion_state==2):
                 # Happy
                 responses, inpnum, options = joy(inpnum, op)
-                if(inpnum==-2):
-                    emotion_state=-1
+                if(inpnum==-1):
+                    emotion_state = -1
             elif(emotion_state==3):
                 # Sad
                 responses, inpnum, options = sad(inpnum, op)
+                if(inpnum==-1):
+                    emotion_state = -1
+
 
         print("RR : ", responses)
+        print("OP: ", options)
         option = '-'.join(options)
         response = '_'.join(responses)
         return response+"#"+option

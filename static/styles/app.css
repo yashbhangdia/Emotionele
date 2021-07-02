@@ -4,12 +4,7 @@ a {
 p {
   margin-top: 1rem;
 }
-a:hover {
-  color:#23527c;
-}
-a:visited {
-  color: #8d75a3;
-}
+
 
 body {
   box-sizing: border-box;
@@ -47,7 +42,7 @@ red {
 
 #controls {
   display: flex;
-  margin: 2.8rem 20% 2% 20%;
+  margin: 0.2rem 20% 0.2rem 20%;
 }   
 
 button {
@@ -127,7 +122,7 @@ li {
 
 .chat
 {
-  height: 370px;
+  height: 360px;
   overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;
@@ -141,7 +136,7 @@ li {
 #chip-options
 {
   text-align: center;
-  margin-top: 0.2rem;
+  margin-top: 0rem;
 }
 
 .chip
@@ -168,4 +163,10 @@ ul{
 ul li
 {
   display: inline;
+}
+
+
+a {
+  color: coral !important;
+  text-decoration: none;
 }

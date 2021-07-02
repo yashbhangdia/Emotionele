@@ -4,6 +4,6 @@ def joy(num, op):
     if(num==0):
         if(op == "yes"):
             print("Hello")
-            return ["What would you like to share?"], -2, []
+            return ["What would you like to share?"], -1, []
         else:
-            return ["It was really nice talking to you! Feel free to come back if you're feeling low. I could lend my huge ears :) Bye for now!"], -2, []
+            return ["It was really nice talking to you! Feel free to come back if you're feeling low. I could lend my huge ears :) Bye for now!"], -1, []
